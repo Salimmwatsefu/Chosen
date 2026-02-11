@@ -5,29 +5,51 @@ import Section from "./Section";
 export default function RevealSection({ next, giftChoice }) {
   const [index, setIndex] = useState(0);
 
-  // The story chapters. 
-  // We mix specific lines based on her choice with general deep romance.
-  const genericLines = [
-    "I often find myself wondering...",
-    "How did I get so lucky?",
-    "Every moment with you feels like a favorite song,",
-    "Playing softly on repeat.",
-    "You are my peace in the chaos.",
-    "And my excitement in the quiet.",
+  // 1. MUSIC JOURNEY
+  const musicLines = [
+    "I often find myself listening...",
+    "Not just to the songs playing,",
+    "But to the quiet moments in between.",
+    "Because that’s where I find you.",
+    "Every beat of my heart,",
+    "Finds its perfect rhythm in yours.",
+    "You are the melody I never want to stop singing.",
+    "So I have a question..."
   ];
 
-  // Specific ending lines based on her "Vibe Choice"
-  const closingLines = {
-    'MUSIC': "You are the melody I never want to stop singing.",
-    'HEELS': "You shine brighter than any spotlight ever could.",
-    'DRESS': "You are the elegance that makes my world beautiful."
+  // 2. HEELS JOURNEY
+  const heelsLines = [
+    "I often find myself watching...",
+    "Not the crowd around us,",
+    "But the light that seems to follow you.",
+    "You don't just walk into a room,",
+    "You change the entire atmosphere.",
+    "Brighter than any star in the sky,",
+    "You shine brighter than any spotlight ever could.",
+    "So I have a question..."
+  ];
+
+  // 3. DRESS JOURNEY
+  const dressLines = [
+    "I often find myself wondering...",
+    "How someone can be so timeless.",
+    "Like the moon pulls the tide,",
+    "You pull me closer without even trying.",
+    "Grace isn't just something you wear,",
+    "It is woven into your very soul.",
+    "You are the elegance that makes my world beautiful.",
+    "So I have a question..."
+  ];
+
+  // Map choices to lines
+  const linesMap = {
+    'MUSIC': musicLines,
+    'HEELS': heelsLines,
+    'DRESS': dressLines
   };
 
-  const lines = [
-    ...genericLines,
-    closingLines[giftChoice] || closingLines['DRESS'], // The personalized line
-    "So I have a question..." // The transition
-  ];
+  // Fallback to Dress if something fails
+  const lines = linesMap[giftChoice] || dressLines;
 
   const handleNext = () => {
     if (index < lines.length - 1) {

@@ -31,7 +31,8 @@ export default function ExperienceSection({ next, setGiftChoice }) {
 
   const handleSelect = (id) => {
     setSelected(id);
-    setGiftChoice(id);
+    setGiftChoice(id); // THIS SAVES HER CHOICE TO THE APP
+    
     // Wait for animation before going next
     setTimeout(() => {
         next();

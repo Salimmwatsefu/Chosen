@@ -5,12 +5,12 @@ import IntroSection from "./components/IntroSection";
 import ExperienceSection from "./components/ExperienceSection";
 import RevealSection from "./components/RevealSection";
 import ValentineQuestion from "./components/ValentineQuestion";
-import DateRequest from "./components/DateRequest";
+import DateRequest from "./components/DateRequest"; // Ensure this is imported
 import FinalState from "./components/FinalState";
 
 export default function App() {
   const [step, setStep] = useState(0);
-  const [giftChoice, setGiftChoice] = useState(null);
+  const [giftChoice, setGiftChoice] = useState(null); // This is the missing link!
 
   return (
     <div className="relative h-screen w-full overflow-hidden text-white selection:bg-rose-500/30">
@@ -28,6 +28,7 @@ export default function App() {
           >
             {step === 0 && <IntroSection next={() => setStep(1)} />}
             
+            {/* PASS THE SETTER SO SHE CAN CHOOSE */}
             {step === 1 && (
               <ExperienceSection 
                 next={() => setStep(2)} 
@@ -35,7 +36,7 @@ export default function App() {
               />
             )}
             
-            {/* The Bridge: RevealSection now knows what she picked */}
+            {/* PASS THE CHOICE SO IT KNOWS WHAT POEM TO PLAY */}
             {step === 2 && (
               <RevealSection 
                 next={() => setStep(3)} 
@@ -45,6 +46,7 @@ export default function App() {
             
             {step === 3 && <ValentineQuestion next={() => setStep(4)} />}
             
+            {/* PASS THE CHOICE FOR THE SECRET CODE */}
             {step === 4 && (
               <DateRequest 
                 next={() => setStep(5)} 
