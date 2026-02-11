@@ -5,30 +5,54 @@ import IntroSection from "./components/IntroSection";
 import ExperienceSection from "./components/ExperienceSection";
 import RevealSection from "./components/RevealSection";
 import ValentineQuestion from "./components/ValentineQuestion";
+import DateRequest from "./components/DateRequest";
 import FinalState from "./components/FinalState";
 
 export default function App() {
   const [step, setStep] = useState(0);
+  const [giftChoice, setGiftChoice] = useState(null);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
-      <AmbientBackground step={step} />
+    <div className="relative h-screen w-full overflow-hidden text-white selection:bg-rose-500/30">
+      <AmbientBackground />
 
-      <main className="relative z-10 h-full">
+      <main className="relative z-10 h-full w-full font-romantic">
         <AnimatePresence mode="wait">
           <motion.div
             key={step}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="h-full"
+            className="h-full w-full"
+            initial={{ opacity: 0, filter: "blur(10px)" }}
+            animate={{ opacity: 1, filter: "blur(0px)" }}
+            exit={{ opacity: 0, filter: "blur(10px)" }}
+            transition={{ duration: 1 }}
           >
             {step === 0 && <IntroSection next={() => setStep(1)} />}
-            {step === 1 && <ExperienceSection next={() => setStep(2)} />}
-            {step === 2 && <RevealSection next={() => setStep(3)} />}
+            
+            {step === 1 && (
+              <ExperienceSection 
+                next={() => setStep(2)} 
+                setGiftChoice={setGiftChoice} 
+              />
+            )}
+            
+            {/* The Bridge: RevealSection now knows what she picked */}
+            {step === 2 && (
+              <RevealSection 
+                next={() => setStep(3)} 
+                giftChoice={giftChoice} 
+              />
+            )}
+            
             {step === 3 && <ValentineQuestion next={() => setStep(4)} />}
-            {step === 4 && <FinalState />}
+            
+            {step === 4 && (
+              <DateRequest 
+                next={() => setStep(5)} 
+                giftChoice={giftChoice} 
+              />
+            )}
+            
+            {step === 5 && <FinalState />}
           </motion.div>
         </AnimatePresence>
       </main>
