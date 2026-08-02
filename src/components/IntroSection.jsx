@@ -19,7 +19,7 @@ export default function IntroSection({ next }) {
         <h1 className="text-5xl md:text-7xl font-romantic text-white italic leading-tight">
           Hi 
           <span className="relative inline-block ml-4 text-rose-200 glow-text">
-            Gloria
+            [*Oops*]🤣
             {/* Underline drawn animation */}
             <motion.div 
               className="absolute -bottom-2 left-0 w-full h-[1px] bg-rose-400/50"
